@@ -6,7 +6,7 @@
 #    By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/28 21:24:52 by hshimizu          #+#    #+#              #
-#    Updated: 2023/10/07 08:30:44 by hshimizu         ###   ########.fr        #
+#    Updated: 2023/10/16 14:16:14 by hshimizu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,23 @@ MAIN			= $(ROOT_DIR)/main.c
 
 SRCS			= \
 	$(addprefix $(ROOT_DIR)/srcs/, \
+		philo0.c \
+		philo1.c \
+		philo2.c \
+		philo3.c \
+		philo4.c \
+		philo5.c \
+	) \
+	$(addprefix $(ROOT_DIR)/utils/, \
+		utils.c \
 	)
 
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
-CFLAGS			= -Wall -Wextra -Werror
+# CFLAGS			= -Wall -Wextra -Werror
 CFLAGS			+= -g
 IDFLAGS			+= -I$(INCS_DIR)
+LIBS			= -pthread
 
 .PHONY: all clean fclean re bonus
 
@@ -49,8 +59,8 @@ fclean: clean
 re: fclean all
 
 .PHONY: test
-test: test.c $(OBJS)
-	$(CC) $(LDFLAGS) $(IDFLAGS) $^ -o $@ $(LIBS)
+test: test.c #$(OBJS)
+	$(CC) $(LDFLAGS) -g $(IDFLAGS) $^ -o $@ $(LIBS)
 
 .PHONY: norm
 norm: $(MAIN) $(SRCS) $(INCS_DIR)
