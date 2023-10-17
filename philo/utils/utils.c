@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 04:24:02 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/12 22:49:57 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/10/17 09:59:21 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ long	timeval2useconds(struct timeval t)
 
 struct timeval	get_interval(struct timeval a, struct timeval b)
 {
-	struct timeval ret;
+	struct timeval	ret;
 
 	ret.tv_sec = a.tv_sec - b.tv_sec;
 	ret.tv_usec = a.tv_usec - b.tv_usec;

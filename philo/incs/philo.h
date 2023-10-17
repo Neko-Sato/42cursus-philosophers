@@ -6,12 +6,12 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/17 09:47:21 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/10/17 09:59:54 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_LIFE_H
-# define PHILO_LIFE_H
+#ifndef PHILO_H
+# define PHILO_H
 
 # include <pthread.h>
 # include <sys/time.h>
@@ -95,5 +95,4 @@ int						philo__life(t_philo *self);
 // take_right_fork
 // put_left_fork
 // put_right_fork
-
 #endif
