@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/16 17:55:26 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/10/17 08:27:57 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,34 @@ typedef struct s_philo	t_philo;
 
 typedef struct s_table
 {
-	pthread_mutex_t		lock;
+	pthread_mutex_t		*lock;
 	int					is_running;
 	struct timeval		start_time;
 	size_t				len;
 	size_t				__forks_len;
 	pthread_mutex_t		*forks;
-	t_philo				*philos;
+	t_philo				**philos;
 }						t_table;
 
 typedef struct s_table_args
 {
 	size_t				len;
-	pthread_mutex_t		*philos;
+	t_philo				**philos;
 }						t_table_args;
 
 t_table					*table__new(t_table_args *args);
 int						table__int(t_table *self, t_table_args *args);
-/*
-	いろいろ初期化をする
-	哲学者をこのテーブルに割り当てる
-*/
 int						table__del(t_table **self_ptr);
-/*
-	このインスタンスを削除する
-	哲学者の割り当てを消す
-*/
+int						table__seat_philo(t_table *self);
+int						table__leave_philo(t_table *self);
+
+int						table__run(t_table *self);
+int						table__start(t_table *self);
+int						table__wait(t_table *self);
+int						table__stop(t_table *self);
+
+// t_table					*table__new(t_table_args *args);
+// void					table__del(t_table **self_ptr);
 
 // get_time
 /*
