@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/17 07:35:12 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:14:34 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ t_table	*table__new(t_table_args *args)
 
 int	table__int(t_table *self, t_table_args *args)
 {
-	int	ret;
-
 	self->lock = mutex_new();
 	if (!self->lock)
-		return (ret);
+		return (-1);
 	self->len = args->len;
 	self->forks = malloc(sizeof(*self->forks) * self->len);
 	if (!self->forks)

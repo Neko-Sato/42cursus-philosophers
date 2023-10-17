@@ -6,7 +6,7 @@
 #    By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/28 21:24:52 by hshimizu          #+#    #+#              #
-#    Updated: 2023/10/17 08:35:13 by hshimizu         ###   ########.fr        #
+#    Updated: 2023/10/17 11:13:38 by hshimizu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,10 @@ SRCS			= \
 		philo_0.c \
 		philo_1.c \
 		philo_2.c \
+		philo_3.c \
 		table_0.c \
 		table_1.c \
+		table_2.c \
 	) \
 	$(addprefix $(ROOT_DIR)/utils/, \
 		utils.c \
@@ -32,7 +34,7 @@ SRCS			= \
 
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
-# CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror
 CFLAGS			+= -g
 IDFLAGS			+= -I$(INCS_DIR)
 LIBS			= -pthread

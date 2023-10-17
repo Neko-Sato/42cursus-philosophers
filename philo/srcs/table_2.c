@@ -1,41 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_2.c                                          :+:      :+:    :+:   */
+/*   table_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 08:34:06 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/17 12:07:44 by hshimizu         ###   ########.fr       */
+/*   Created: 2023/10/17 10:02:23 by hshimizu          #+#    #+#             */
+/*   Updated: 2023/10/17 10:37:04 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include "table.h"
 #include "utils.h"
-#include <pthread.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <sys/time.h>
 
-int	philo__life(t_philo *self)
+long	table__get_time(t_table *self)
 {
-	while (1)
-	{
-		pthread_mutex_lock(self->lock);
-		if (!self->is_active)
-			break ;
-		pthread_mutex_unlock(self->lock);
-		philo__do_to_sleep(self);
-		pthread_mutex_lock(self->lock);
-		if (!self->is_active)
-			break ;
-		pthread_mutex_unlock(self->lock);
-		philo__do_to_think(self);
-	}
-	pthread_mutex_unlock(self->lock);
-	return (0);
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL))
+		return (-1);
+	return (timeval2useconds(get_interval(time, self->start_time)));
 }
-
-
-// check_died

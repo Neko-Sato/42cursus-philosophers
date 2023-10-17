@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/17 09:50:12 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:00:52 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	philo__wait(t_philo *self)
 
 int	philo__stop(t_philo *self)
 {
+	write(1, "stop\n", 5);
 	pthread_mutex_lock(self->lock);
 	self->is_active = 0;
 	pthread_mutex_unlock(self->lock);

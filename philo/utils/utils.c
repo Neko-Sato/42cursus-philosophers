@@ -6,12 +6,13 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 04:24:02 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/17 09:59:21 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:24:30 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pthread.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <sys/time.h>
 
 pthread_mutex_t	*mutex_new(void)
@@ -34,7 +35,7 @@ int	mutex_del(pthread_mutex_t *var)
 
 long	timeval2useconds(struct timeval t)
 {
-	return (t.tv_sec * 1000000l + t.tv_usec);
+	return (t.tv_sec * 1000 + t.tv_usec / 1000);
 }
 
 struct timeval	get_interval(struct timeval a, struct timeval b)

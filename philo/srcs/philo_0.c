@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/17 09:52:54 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:00:45 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	philo__init(t_philo *self, t_philo_args *args)
 		return (-1);
 	self->lock_printf = args->lock_printf;
 	self->nbr = args->nbr;
-	self->count_to_eat = 0;
 	self->time_to_die = args->time_to_die;
 	self->time_to_eat = args->time_to_eat;
 	self->time_to_sleep = args->time_to_sleep;

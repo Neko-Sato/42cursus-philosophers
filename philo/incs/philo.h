@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/17 09:59:54 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/10/17 11:19:28 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 
 typedef struct s_table	t_table;
 
-# define MASG_TAKEN_FORK "%ld %d has taken a fork\n"
-# define MASG_EATING "%ld %d is eating\n"
-# define MASG_SLEEPING "%ld %d is sleeping\n"
-# define MASG_THINKING "%ld %d thinking\n"
-# define MASG_DIED "%ld %d died\n"
+# define MASG_TAKEN_FORK "%8ld %d has taken a fork\n"
+# define MASG_EATING "%8ld %d is eating\n"
+# define MASG_SLEEPING "%8ld %d is sleeping\n"
+# define MASG_THINKING "%8ld %d thinking\n"
+# define MASG_DIED "%8ld %d died\n"
 
 typedef enum e_philo_state
 {
@@ -73,6 +73,10 @@ int						philo__wait(t_philo *self);
 int						philo__stop(t_philo *self);
 
 int						philo__life(t_philo *self);
+
+// int						philo__do_to_eat(t_philo *self);
+int						philo__do_to_sleep(t_philo *self);
+int						philo__do_to_think(t_philo *self);
 
 // seat
 // テーブルやフォークの情報をセットする

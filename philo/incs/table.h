@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/17 08:27:57 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:11:55 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int						table__start(t_table *self);
 int						table__wait(t_table *self);
 int						table__stop(t_table *self);
 
+long					table__get_time(t_table *self);
 // t_table					*table__new(t_table_args *args);
 // void					table__del(t_table **self_ptr);
 
