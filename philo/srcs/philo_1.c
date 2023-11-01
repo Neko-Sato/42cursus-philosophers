@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/17 12:00:52 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/10/31 21:10:43 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,46 +17,47 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int	philo__run(t_philo *self)
-{
-	if (philo__start(self))
-		return (-1);
-	philo__wait(self);
-	return (0);
-}
-
-static void	*routine(void *args)
-{
-	philo__life((t_philo *)args);
-	return (NULL);
-}
-
 int	philo__start(t_philo *self)
 {
-	pthread_mutex_lock(self->lock);
+	pthread_mutex_lock(self->_lock);
 	while (1)
 	{
-		if (pthread_create(&self->thread, NULL, routine, self))
+		self->_thread = thread_start((void *)philo__routine, self);
+		if (!self->_thread)
 			break ;
-		self->is_active = 1;
-		pthread_mutex_unlock(self->lock);
+		self->active = 1;
+		pthread_mutex_unlock(self->_lock);
 		return (0);
 	}
-	pthread_mutex_unlock(self->lock);
+	pthread_mutex_unlock(self->_lock);
 	return (-1);
 }
 
 int	philo__wait(t_philo *self)
 {
-	pthread_join(self->thread, NULL);
+	thread_join(self->_thread, NULL);
 	return (0);
 }
 
 int	philo__stop(t_philo *self)
 {
-	write(1, "stop\n", 5);
-	pthread_mutex_lock(self->lock);
-	self->is_active = 0;
-	pthread_mutex_unlock(self->lock);
+	pthread_mutex_lock(self->_lock);
+	self->active = 0;
+	pthread_mutex_unlock(self->_lock);
 	return (0);
+}
+
+void	*philo__routine(t_philo *self)
+{
+	while (1)
+	{
+		if (philo__do_to_eat(self))
+			break ;
+		if (philo__do_to_sleep(self))
+			break ;
+		if (philo__do_to_think(self))
+			break ;
+	}
+	philo__put_fork(self);
+	return (NULL);
 }

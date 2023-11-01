@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 08:34:06 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/17 12:07:44 by hshimizu         ###   ########.fr       */
+/*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
+/*   Updated: 2023/10/31 21:53:33 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,20 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int	philo__life(t_philo *self)
+int	philo__put_msg(t_philo *self, char *msg)
 {
-	while (1)
-	{
-		pthread_mutex_lock(self->lock);
-		if (!self->is_active)
-			break ;
-		pthread_mutex_unlock(self->lock);
-		philo__do_to_sleep(self);
-		pthread_mutex_lock(self->lock);
-		if (!self->is_active)
-			break ;
-		pthread_mutex_unlock(self->lock);
-		philo__do_to_think(self);
-	}
-	pthread_mutex_unlock(self->lock);
+	pthread_mutex_lock(self->_lock_printf);
+	printf("%ld %d %s\n", table__get_time(self->_table), self->_nbr, msg);
+	pthread_mutex_unlock(self->_lock_printf);
 	return (0);
 }
 
+int	philo__get_active(t_philo *self)
+{
+	int active;
 
-// check_died
+	pthread_mutex_lock(self->_lock);
+	active = self->active;
+	pthread_mutex_unlock(self->_lock);
+	return (active);
+}

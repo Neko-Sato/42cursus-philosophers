@@ -1,19 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 04:24:02 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/17 11:24:30 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/10/29 01:44:43 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pthread.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <sys/time.h>
+
+pthread_t	*thread_start(void *(*routine)(void *), void *args)
+{
+	pthread_t	*thread;
+
+	thread = malloc(sizeof(pthread_t));
+	if (thread && pthread_create(thread, NULL, routine, args))
+	{
+		free(thread);
+		thread = NULL;
+	}
+	return (thread);
+}
+
+int	thread_join(pthread_t *thread, void **thread_return)
+{
+	if (thread && pthread_join(*thread, thread_return))
+		return (-1);
+	free(thread);
+	return (0);
+}
 
 pthread_mutex_t	*mutex_new(void)
 {
@@ -21,7 +40,10 @@ pthread_mutex_t	*mutex_new(void)
 
 	var = malloc(sizeof(pthread_mutex_t));
 	if (var && pthread_mutex_init(var, NULL))
+	{
 		free(var);
+		var = NULL;
+	}
 	return (var);
 }
 
@@ -31,30 +53,4 @@ int	mutex_del(pthread_mutex_t *var)
 		return (-1);
 	free(var);
 	return (0);
-}
-
-long	timeval2useconds(struct timeval t)
-{
-	return (t.tv_sec * 1000 + t.tv_usec / 1000);
-}
-
-struct timeval	get_interval(struct timeval a, struct timeval b)
-{
-	struct timeval	ret;
-
-	ret.tv_sec = a.tv_sec - b.tv_sec;
-	ret.tv_usec = a.tv_usec - b.tv_usec;
-	while (ret.tv_usec < 0)
-	{
-		ret.tv_sec--;
-		ret.tv_usec += 1000000;
-	}
-	ret.tv_sec += ret.tv_usec / 1000000;
-	ret.tv_usec %= 1000000;
-	if (ret.tv_sec < 0)
-	{
-		ret.tv_sec++;
-		ret.tv_usec -= 1000000;
-	}
-	return (ret);
 }

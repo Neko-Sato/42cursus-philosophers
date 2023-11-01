@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 10:02:23 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/17 10:37:04 by hshimizu         ###   ########.fr       */
+/*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
+/*   Updated: 2023/10/31 22:19:33 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,46 @@
 #include "table.h"
 #include "utils.h"
 #include <stdlib.h>
-#include <sys/time.h>
+#include <stdio.h>
 
-long	table__get_time(t_table *self)
+int	table__check_died(t_table *self)
 {
-	struct timeval	time;
+	int				ret;
+	t_philo			*philo;
+	size_t			i;
+	long			now;
 
-	if (gettimeofday(&time, NULL))
-		return (-1);
-	return (timeval2useconds(get_interval(time, self->start_time)));
+	now = table__get_time(self);
+	ret = 0;
+	i = 0;
+	while (!ret && i < self->_len)
+	{
+		philo = self->_philos[i];
+		pthread_mutex_lock(philo->_lock);
+		ret |= (0 <= philo->last_ate_time && philo->last_ate_time + (long)philo->_time_to_die < now);
+		pthread_mutex_unlock(philo->_lock);
+		if (ret)
+			philo__put_msg(philo, MSG_DIED);
+		i++;
+	}
+	return (ret);
+}
+
+int	table__check_satisfied(t_table *self)
+{
+	int				ret;
+	t_philo			*philo;
+	size_t			i;
+
+	ret = 1;
+	i = 0;
+	while (ret && i < self->_len)
+	{
+		philo = self->_philos[i];
+		pthread_mutex_lock(philo->_lock);
+		ret &= (philo->_must_eat && philo->_must_eat <= philo->count_to_eat);
+		pthread_mutex_unlock(philo->_lock);
+		i++;
+	}
+	return (ret);
 }
