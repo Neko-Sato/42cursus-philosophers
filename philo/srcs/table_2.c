@@ -6,23 +6,23 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/04 15:06:04 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/04 18:13:46 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include "philo_visualizer.h"
 #include "table.h"
 #include "utils.h"
-#include "philo_visualizer.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int	table__check_died(t_table *self)
 {
-	int				ret;
-	t_philo			*philo;
-	size_t			i;
-	long			now;
+	int		ret;
+	t_philo	*philo;
+	size_t	i;
+	long	now;
 
 	pthread_mutex_lock(self->_lock);
 	now = table__get_time(self);
@@ -33,7 +33,8 @@ int	table__check_died(t_table *self)
 	{
 		philo = self->_philos[i];
 		pthread_mutex_lock(philo->_lock);
-		ret |= (0 <= philo->last_ate_time && philo->last_ate_time + (long)philo->_time_to_die < now);
+		ret |= (0 <= philo->last_ate_time && philo->last_ate_time
+				+ philo->_time_to_die < now);
 		pthread_mutex_unlock(philo->_lock);
 		if (ret)
 		{
@@ -47,9 +48,9 @@ int	table__check_died(t_table *self)
 
 int	table__check_satisfied(t_table *self)
 {
-	int				ret;
-	t_philo			*philo;
-	size_t			i;
+	int		ret;
+	t_philo	*philo;
+	size_t	i;
 
 	ret = 1;
 	i = 0;

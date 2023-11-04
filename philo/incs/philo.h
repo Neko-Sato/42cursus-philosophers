@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/04 14:52:12 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/04 18:11:21 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 typedef struct s_table	t_table;
 
 # define MSG_TAKEN_FORK "has taken a fork"
-// # define MSG_EATING "\e[38;2;0;255;0mis eating\e[0m"
-# define MSG_EATING "is eating"
-// # define MSG_SLEEPING "\e[38;2;0;0;255mis sleeping\e[0m"
-# define MSG_SLEEPING "is sleeping"
+# define MSG_EATING "\e[38;2;0;255;0mis eating\e[0m"
+// # define MSG_EATING "is eating"
+# define MSG_SLEEPING "\e[38;2;0;0;255mis sleeping\e[0m"
+// # define MSG_SLEEPING "is sleeping"
 # define MSG_THINKING "is thinking"
-// # define MSG_DIED "\e[38;2;255;0;0mdied\e[0m"
-# define MSG_DIED "died"
+# define MSG_DIED "\e[38;2;255;0;0mdied\e[0m"
+// # define MSG_DIED "died"
 
 typedef enum e_philo_state
 {
@@ -50,18 +50,18 @@ typedef struct s_philo
 	unsigned int		_is_using_fork;
 	pthread_mutex_t		*_left_fork;
 	pthread_mutex_t		*_right_fork;
-	size_t				_time_to_die;
-	size_t				_time_to_eat;
-	size_t				_time_to_sleep;
+	long				_time_to_die;
+	long				_time_to_eat;
+	long				_time_to_sleep;
 	size_t				_must_eat;
 }						t_philo;
 
 typedef struct s_philo_args
 {
 	pthread_mutex_t		*lock_printf;
-	size_t				time_to_die;
-	size_t				time_to_eat;
-	size_t				time_to_sleep;
+	long				time_to_die;
+	long				time_to_eat;
+	long				time_to_sleep;
 	size_t				must_eat;
 }						t_philo_args;
 

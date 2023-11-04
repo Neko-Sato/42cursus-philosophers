@@ -6,7 +6,7 @@
 #    By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/28 21:24:52 by hshimizu          #+#    #+#              #
-#    Updated: 2023/11/04 09:08:53 by hshimizu         ###   ########.fr        #
+#    Updated: 2023/11/04 19:12:08 by hshimizu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ MAIN			= $(ROOT_DIR)/main.c
 
 SRCS			= \
 	$(addprefix $(ROOT_DIR)/srcs/, \
+		dining_philo.c \
 		philo_0.c \
 		philo_1.c \
 		philo_2.c \
@@ -61,7 +62,6 @@ clean:
 	$(RM) -r $(OBJS_DIR)
 
 fclean: clean
-	@make -C $(FT) fclean
 	$(RM) $(NAME)
 
 re: fclean all
