@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:53:31 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/04 20:46:25 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:50:09 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ All arguments must be unsigned signed integers greater than zero.\n\
 Made by hshimizu.\n\
 source : https : //github.com/Neko-Sato/42cursus-philosophers\n\
 "
-#define MSG_INVALID_VALUE "Invalid value.\n"
+#define MSG_INVALID_VALUE "Invalid value\n"
+#define MSG_ERROR "Error\n"
 
 static int	purse_args(t_dining_philo_args *args, int argc, char *argv[]);
 static void	put_error(int code);
@@ -63,7 +64,7 @@ static void	put_error(int code)
 	else if (code == 2)
 		msg = MSG_INVALID_VALUE;
 	else
-		msg = "Error\n";
+		msg = MSG_ERROR;
 	write(STDERR_FILENO, msg, ft_strlen(msg));
 }
 
