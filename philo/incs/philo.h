@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/04 18:11:21 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:56:25 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,19 @@
 
 typedef struct s_table	t_table;
 
-# define MSG_TAKEN_FORK "has taken a fork"
-# define MSG_EATING "\e[38;2;0;255;0mis eating\e[0m"
-// # define MSG_EATING "is eating"
-# define MSG_SLEEPING "\e[38;2;0;0;255mis sleeping\e[0m"
-// # define MSG_SLEEPING "is sleeping"
-# define MSG_THINKING "is thinking"
-# define MSG_DIED "\e[38;2;255;0;0mdied\e[0m"
-// # define MSG_DIED "died"
+# ifndef COLOR_MSG
+#  define MSG_TAKEN_FORK "has taken a fork"
+#  define MSG_EATING "is eating"
+#  define MSG_SLEEPING "is sleeping"
+#  define MSG_THINKING "is thinking"
+#  define MSG_DIED "died"
+# else
+#  define MSG_TAKEN_FORK "has taken a fork"
+#  define MSG_EATING "\e[38;2;0;255;0mis eating\e[0m"
+#  define MSG_SLEEPING "\e[38;2;0;0;255mis sleeping\e[0m"
+#  define MSG_THINKING "is thinking"
+#  define MSG_DIED "\e[38;2;255;0;0mdied\e[0m"
+# endif
 
 typedef enum e_philo_state
 {

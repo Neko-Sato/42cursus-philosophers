@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:22:36 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/04 20:27:03 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/04 21:31:42 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	dining_philo(t_dining_philo_args *args)
 {
 	(void)args;
 	return 1;
-	// philovisualizer_init(args->len);
+	//philovisualizer_init(args->len);
 	// lock_printf = mutex_new();
 	// if (!lock_printf)
 	// 	break ;
