@@ -6,13 +6,14 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/31 22:19:33 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/04 15:06:04 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include "table.h"
 #include "utils.h"
+#include "philo_visualizer.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -23,7 +24,9 @@ int	table__check_died(t_table *self)
 	size_t			i;
 	long			now;
 
+	pthread_mutex_lock(self->_lock);
 	now = table__get_time(self);
+	pthread_mutex_unlock(self->_lock);
 	ret = 0;
 	i = 0;
 	while (!ret && i < self->_len)
@@ -33,7 +36,10 @@ int	table__check_died(t_table *self)
 		ret |= (0 <= philo->last_ate_time && philo->last_ate_time + (long)philo->_time_to_die < now);
 		pthread_mutex_unlock(philo->_lock);
 		if (ret)
-			philo__put_msg(philo, MSG_DIED);
+		{
+			philovisualizer_send(philo->_nbr, PV_DIED);
+			philo__put_msg(philo, MSG_DIED, 1);
+		}
 		i++;
 	}
 	return (ret);

@@ -6,7 +6,7 @@
 #    By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/28 21:24:52 by hshimizu          #+#    #+#              #
-#    Updated: 2023/10/31 21:56:06 by hshimizu         ###   ########.fr        #
+#    Updated: 2023/11/04 09:08:53 by hshimizu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,9 @@ SRCS			= \
 	$(addprefix $(ROOT_DIR)/utils/, \
 		thread.c \
 		time.c \
+	) \
+	$(addprefix $(ROOT_DIR)/philo_visualizer/, \
+		philo_visualizer.c \
 	)
 
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
@@ -40,6 +43,7 @@ CC				= gcc-10
 CFLAGS			= -Wall -Wextra -Werror
 CFLAGS			+= -g
 IDFLAGS			+= -I$(INCS_DIR)
+IDFLAGS			+= -I./philo_visualizer 
 LIBS			= -pthread
 
 .PHONY: all clean fclean re bonus
@@ -63,7 +67,7 @@ fclean: clean
 re: fclean all
 
 .PHONY: test
-test: test.c $(OBJS)
+test: test.c $(OBJS)	
 	$(CC) $(LDFLAGS) -g -fsanitize=thread $(IDFLAGS) $^ -o $@ $(LIBS)
 
 .PHONY: norm

@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/31 22:13:27 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/04 15:41:05 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	table__start(t_table *self)
 		while (i < self->_len)
 			if (philo__start(self->_philos[i++]))
 				break ;
-		if (gettimeofday(&self->start_time, NULL))
-			break ;
 		self->_thread = thread_start((void *)table__monitor, self);
 		if (!self->_thread)
+			break ;
+		if (gettimeofday(&self->start_time, NULL))
 			break ;
 		self->is_running = 1;
 		pthread_mutex_unlock(self->_lock);
@@ -86,9 +86,7 @@ long	table__get_time(t_table *self)
 	long			time;
 	struct timeval	now;
 
-	pthread_mutex_lock(self->_lock);
 	gettimeofday(&now, NULL);
 	time = timeval2useconds(interval(now, self->start_time));
-	pthread_mutex_unlock(self->_lock);
 	return (time);
 }

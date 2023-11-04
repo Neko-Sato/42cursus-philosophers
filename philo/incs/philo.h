@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/31 22:23:30 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:52:12 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int						philo__stop(t_philo *self);
 void					*philo__routine(t_philo *self);
 
 //	2
-int						philo__put_msg(t_philo *self, char *msg);
+int						philo__put_msg(t_philo *self, char *msg, int enforce);
 int						philo__get_active(t_philo *self);
 
 //	3
