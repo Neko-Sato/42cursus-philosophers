@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:53:31 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/04 20:27:30 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:46:25 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char *argv[])
 	}
 	if (dining_philo(&args))
 	{
-		write(STDERR_FILENO, "Error\n", 6);
+		put_error(0);
 		return (1);
 	}
 	return (0);
@@ -63,7 +63,7 @@ static void	put_error(int code)
 	else if (code == 2)
 		msg = MSG_INVALID_VALUE;
 	else
-		msg = "";
+		msg = "Error\n";
 	write(STDERR_FILENO, msg, ft_strlen(msg));
 }
 
@@ -82,7 +82,7 @@ static int	purse_args(t_dining_philo_args *args, int argc, char *argv[])
 	if (argc == 6)
 	{
 		if (str2num(&args->must_eat, argv[5]))
-			return (-2);
+			return (2);
 	}
 	else
 		args->must_eat = 0;
