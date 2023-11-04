@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:53:31 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/04 20:50:09 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/04 21:51:39 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ Usage : philo NUMBER TIME_TO_DIE TIME_TO_EAT TIME_TO_SLEEP [MUST_EAT]\n\
 \tTIME_TO_DIE\tTime to die.\n\
 \tTIME_TO_EAT\tTime to eat.\n\
 \tTIME_TO_SLEEP\tTime to sleep.\n\
-\t[MUST_EAT]\tTime to finish when all philosophers have eaten that many times.\n\
+\t[MUST_EAT]\tFinish when each philosopher has eaten this many times.\n\
 \n\
 All arguments must be unsigned signed integers greater than zero.\n\
 \n\
 Made by hshimizu.\n\
-source : https : //github.com/Neko-Sato/42cursus-philosophers\n\
+github\t: https://github.com/Neko-Sato/\n\
+profile\t: https://profile.intra.42.fr/users/hshimizu\n\
 "
 #define MSG_INVALID_VALUE "Invalid value\n"
 #define MSG_ERROR "Error\n"
