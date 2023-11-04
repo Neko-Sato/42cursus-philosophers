@@ -6,7 +6,7 @@
 #    By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/28 21:24:52 by hshimizu          #+#    #+#              #
-#    Updated: 2023/11/04 19:12:08 by hshimizu         ###   ########.fr        #
+#    Updated: 2023/11/04 20:22:42 by hshimizu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,12 @@ SRCS			= \
 	$(addprefix $(ROOT_DIR)/utils/, \
 		thread.c \
 		time.c \
+		ft_strlen.c \
+		ft_atol.c \
+		ft_isdigit.c \
+		ft_isnumber.c \
+		ft_isspace.c \
+		ft_strchr.c \
 	) \
 	$(addprefix $(ROOT_DIR)/philo_visualizer/, \
 		philo_visualizer.c \
