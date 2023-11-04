@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/04 15:30:40 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/05 00:53:37 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	philo__take_fork(t_philo *self)
 
 	actions[0] = philo__take_left_fork;
 	actions[1] = philo__take_right_fork;
+	if (self->_nbr % 2)
+		usleep(5000);
 	if (actions[self->_nbr % 2 == 0](self))
 		return (-1);
 	if (actions[self->_nbr % 2 != 0](self))
