@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/05 16:22:32 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 00:23:39 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,33 @@
 int	table__start(t_table *self)
 {
 	size_t	i;
+	size_t	c;
 
-	pthread_mutex_lock(self->_lock);
-	i = 0;
+	c = self->_len / 2 + self->_len % 2;
 	while (1)
 	{
-		while (i < self->_len)
-			if (philo__start(self->_philos[i++]))
-				break ;
+		pthread_mutex_lock(self->_lock);
+		if (gettimeofday(&self->start_time, NULL))
+		{
+			pthread_mutex_unlock(self->_lock);
+			break ;
+		}
+		self->is_running = 1;
+		pthread_mutex_unlock(self->_lock);
 		self->_thread = thread_start((void *)table__monitor, self);
 		if (!self->_thread)
 			break ;
-		if (gettimeofday(&self->start_time, NULL))
+		i = 0;
+		while (i < self->_len)
+		{
+			if (philo__start(self->_philos[(i - (c <= i) * c) * 2 + (c <= i)]))
+				break ;
+			i++;
+		}
+		if (i < self->_len)
 			break ;
-		self->is_running = 1;
-		pthread_mutex_unlock(self->_lock);
 		return (0);
 	}
-	pthread_mutex_unlock(self->_lock);
 	table__stop(self);
 	return (-1);
 }

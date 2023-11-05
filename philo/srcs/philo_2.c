@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/04 20:42:47 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 00:38:44 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ int	philo__get_active(t_philo *self)
 {
 	int	active;
 
+	pthread_mutex_lock(self->_table->_lock);
 	pthread_mutex_lock(self->_lock);
+	self->active &= self->_table->is_running;
 	active = self->active;
 	pthread_mutex_unlock(self->_lock);
+	pthread_mutex_unlock(self->_table->_lock);
 	return (active);
 }
