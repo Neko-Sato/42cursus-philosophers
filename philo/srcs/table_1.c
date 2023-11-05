@@ -6,11 +6,12 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/04 15:41:05 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/05 16:22:32 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include "philo_visualizer.h"
 #include "table.h"
 #include "utils.h"
 #include <stdio.h>
@@ -66,17 +67,23 @@ int	table__stop(t_table *self)
 
 void	*table__monitor(t_table *self)
 {
-	int	is_running;
+	int	temp;
 
 	while (1)
 	{
 		pthread_mutex_lock(self->_lock);
-		is_running = self->is_running;
+		temp = self->is_running;
 		pthread_mutex_unlock(self->_lock);
-		if (!is_running)
+		if (!temp)
 			break ;
-		if (table__check_died(self))
+		temp = table__check_died(self);
+		if (temp)
+		{
 			table__stop(self);
+			philovisualizer_send(temp, PV_DIED);
+			philo__put_msg(self->_philos[temp - 1], MSG_DIED, 1);
+			break ;
+		}
 	}
 	return (NULL);
 }
