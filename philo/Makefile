@@ -6,7 +6,7 @@
 #    By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/28 21:24:52 by hshimizu          #+#    #+#              #
-#    Updated: 2023/11/06 01:15:44 by hshimizu         ###   ########.fr        #
+#    Updated: 2023/11/06 04:11:08 by hshimizu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,6 @@ CC				= gcc-10
 CFLAGS			= -Wall -Wextra -Werror
 # CFLAGS			+= -fsanitize=thread
 # CFLAGS			+= -fsanitize=address
-CFLAGS			+= -D COLOR_MSG
 CFLAGS			+= -g
 IDFLAGS			+= -I$(INCS_DIR)
 IDFLAGS			+= -I./philo_visualizer 
