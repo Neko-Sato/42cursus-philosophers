@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/10/31 20:14:29 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 02:02:15 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ int	philo__init(t_philo *self, t_philo_args *args)
 	self->_time_to_eat = args->time_to_eat;
 	self->_time_to_sleep = args->time_to_sleep;
 	self->_must_eat = args->must_eat;
+	self->_snooze = (self->_time_to_die - (self->_time_to_eat
+				+ self->_time_to_sleep)) / 2;
+	if (self->_snooze < 0)
+		self->_snooze = 0;
 	return (0);
 }
 

@@ -6,14 +6,14 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/05 02:39:05 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 01:54:35 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include "philo_visualizer.h"
 #include "table.h"
 #include "utils.h"
-#include "philo_visualizer.h"
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,14 +21,17 @@
 
 int	philo__take_fork(t_philo *self)
 {
-	int snooze;
+	int	snooze;
 	int	(*actions[2])(t_philo *);
 
-	pthread_mutex_lock(self->_lock);
-	snooze = (int)(self->count_to_eat % 2) == self->_nbr % 2;
-	pthread_mutex_unlock(self->_lock);
-	if (snooze)
-		msleep(10);
+	if (self->_snooze)
+	{
+		pthread_mutex_lock(self->_lock);
+		snooze = (int)(self->count_to_eat % 2) == self->_nbr % 2;
+		pthread_mutex_unlock(self->_lock);
+		if (snooze)
+			msleep(snooze);
+	}
 	actions[0] = philo__take_left_fork;
 	actions[1] = philo__take_right_fork;
 	if (actions[self->_nbr % 2 != 0](self))
@@ -47,7 +50,7 @@ int	philo__put_fork(t_philo *self)
 
 int	philo__do_to_eat(t_philo *self)
 {
-	int		stop;
+	int	stop;
 
 	if (philo__take_fork(self))
 		return (-1);

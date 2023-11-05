@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/04 20:56:25 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 01:58:23 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_philo
 	long				_time_to_eat;
 	long				_time_to_sleep;
 	size_t				_must_eat;
+	long				_snooze;
 }						t_philo;
 
 typedef struct s_philo_args
