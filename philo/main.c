@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:53:31 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/05 03:13:28 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 03:35:53 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ profile\t: https://profile.intra.42.fr/users/hshimizu\n\
 
 static int	purse_args(t_dining_philo_args *args, int argc, char *argv[]);
 static void	put_error(int code);
-static int	str2num(long *num, char *str);
+static int	str2num(long *num, char *str, long min, long max);
 
 int	main(int argc, char *argv[])
 {
@@ -71,17 +71,17 @@ static int	purse_args(t_dining_philo_args *args, int argc, char *argv[])
 {
 	if (argc < 5 || 6 < argc)
 		return (1);
-	if (str2num(&args->len, argv[1]))
+	if (str2num(&args->len, argv[1], 1, (long)(~0u)))
 		return (2);
-	if (str2num(&args->time_to_die, argv[2]))
+	if (str2num(&args->time_to_die, argv[2], 50, (long)(~0u)))
 		return (2);
-	if (str2num(&args->time_to_eat, argv[3]))
+	if (str2num(&args->time_to_eat, argv[3], 50, (long)(~0u)))
 		return (2);
-	if (str2num(&args->time_to_sleep, argv[4]))
+	if (str2num(&args->time_to_sleep, argv[4], 50, (long)(~0u)))
 		return (2);
 	if (argc == 6)
 	{
-		if (str2num(&args->must_eat, argv[5]))
+		if (str2num(&args->must_eat, argv[5], 1 , (long)(~0u)))
 			return (2);
 	}
 	else
@@ -89,14 +89,14 @@ static int	purse_args(t_dining_philo_args *args, int argc, char *argv[])
 	return (0);
 }
 
-static int	str2num(long *num, char *str)
+static int	str2num(long *num, char *str, long min, long max)
 {
 	long	n;
 
 	if (!ft_isnumber(str, 0))
 		return (-1);
 	n = ft_atol(str);
-	if (errno || n < 1 || (long)(~0u) < n)
+	if (errno || n < min || max < n)
 		return (-1);
 	*num = n;
 	return (0);
