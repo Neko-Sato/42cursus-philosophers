@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 01:54:35 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 03:25:49 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,8 @@
 
 int	philo__take_fork(t_philo *self)
 {
-	int	snooze;
 	int	(*actions[2])(t_philo *);
 
-	if (self->_snooze)
-	{
-		pthread_mutex_lock(self->_lock);
-		snooze = (int)(self->count_to_eat % 2) == self->_nbr % 2;
-		pthread_mutex_unlock(self->_lock);
-		if (snooze)
-			msleep(snooze);
-	}
 	actions[0] = philo__take_left_fork;
 	actions[1] = philo__take_right_fork;
 	if (actions[self->_nbr % 2 != 0](self))
