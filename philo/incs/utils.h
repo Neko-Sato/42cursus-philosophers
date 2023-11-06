@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/04 20:21:12 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 19:58:45 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 # define UTILS_H
 
 # include <pthread.h>
+# include <stddef.h>
 # include <sys/time.h>
+
+size_t			even_odd(size_t i, size_t len);
+size_t			reverse_even_odd(size_t i, size_t len);
 
 int				ft_strlen(const char *s);
 long			ft_atol(const char *str);

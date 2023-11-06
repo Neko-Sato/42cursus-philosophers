@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dining_philo.h                                     :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 18:05:18 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 17:48:15 by hshimizu         ###   ########.fr       */
+/*   Created: 2023/11/06 19:21:22 by hshimizu          #+#    #+#             */
+/*   Updated: 2023/11/06 21:44:03 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DINING_PHILO_H
-# define DINING_PHILO_H
+#include <stddef.h>
 
-# include <pthread.h>
-
-typedef struct s_dining_philo_args
+size_t	even_odd(size_t i, size_t len)
 {
-	long			len;
-	long			time_to_die;
-	long			time_to_eat;
-	long			time_to_sleep;
-	long			must_eat;
-	pthread_mutex_t	*lock_printf;
-}					t_dining_philo_args;
+	size_t	c;
 
-int					dining_philo(t_dining_philo_args *args);
+	c = len / 2 + len % 2;
+	if (c <= i)
+		return ((i - c) * 2 + 1);
+	else
+		return (i * 2);
+}
 
-#endif
+size_t	reverse_even_odd(size_t i, size_t len)
+{
+	return (i / 2 + (i % 2) * (len / 2 + i % 2));
+}

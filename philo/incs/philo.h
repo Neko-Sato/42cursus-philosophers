@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 03:26:32 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 18:20:03 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef enum e_philo_state
 typedef struct s_philo
 {
 	pthread_mutex_t		*_lock;
-	pthread_mutex_t		*_lock_printf;
 	t_table				*_table;
 	int					active;
 	pthread_t			*_thread;
@@ -55,19 +54,14 @@ typedef struct s_philo
 	unsigned int		_is_using_fork;
 	pthread_mutex_t		*_left_fork;
 	pthread_mutex_t		*_right_fork;
-	long				_time_to_die;
-	long				_time_to_eat;
-	long				_time_to_sleep;
-	size_t				_must_eat;
 }						t_philo;
 
 typedef struct s_philo_args
 {
-	pthread_mutex_t		*lock_printf;
-	long				time_to_die;
-	long				time_to_eat;
-	long				time_to_sleep;
-	size_t				must_eat;
+	int					nbr;
+	t_table				*table;
+	pthread_mutex_t		*left_fork;
+	pthread_mutex_t		*right_fork;
 }						t_philo_args;
 
 //	0

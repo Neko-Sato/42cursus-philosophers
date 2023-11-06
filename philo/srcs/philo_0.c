@@ -6,11 +6,12 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 03:26:28 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 18:20:00 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include "table.h"
 #include "utils.h"
 #include <pthread.h>
 #include <stdlib.h>
@@ -32,15 +33,13 @@ t_philo	*philo__new(t_philo_args *args)
 
 int	philo__init(t_philo *self, t_philo_args *args)
 {
+	self->_nbr = args->nbr;
+	self->_table = args->table;
+	self->_left_fork = args->left_fork;
+	self->_right_fork = args->right_fork;
 	self->_lock = mutex_new();
 	if (!self->_lock)
 		return (-1);
-	self->_lock_printf = args->lock_printf;
-	self->_nbr = -1;
-	self->_time_to_die = args->time_to_die;
-	self->_time_to_eat = args->time_to_eat;
-	self->_time_to_sleep = args->time_to_sleep;
-	self->_must_eat = args->must_eat;
 	return (0);
 }
 

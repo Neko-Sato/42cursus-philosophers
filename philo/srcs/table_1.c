@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 02:15:04 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 21:43:49 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,8 @@
 #include "philo_visualizer.h"
 #include "table.h"
 #include "utils.h"
+#include <stddef.h>
 #include <stdio.h>
-
-static inline size_t	even_odd(size_t i, size_t len)
-{
-	size_t	c;
-
-	c = len / 2 + len % 2;
-	if (c <= i)
-		return ((i - c) * 2 + 1);
-	else
-		return (i * 2);
-}
 
 int	table__start(t_table *self)
 {
@@ -34,8 +24,6 @@ int	table__start(t_table *self)
 	pthread_mutex_lock(self->_lock);
 	while (1)
 	{
-		if (gettimeofday(&self->start_time, NULL))
-			break ;
 		self->_thread = thread_start((void *)table__monitor, self);
 		if (!self->_thread)
 			break ;

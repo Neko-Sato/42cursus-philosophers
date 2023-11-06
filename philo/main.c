@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:53:31 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 04:10:24 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 18:00:55 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,24 @@ int	main(int argc, char *argv[])
 	t_dining_philo_args	args;
 	int					code;
 
+	args.lock_printf = mutex_new();
+	if (!args.lock_printf)
+		return (1);
 	code = purse_args(&args, argc, argv);
-	if (code)
-	{
-		put_error(code);
-		return (1);
-	}
-	if (dining_philo(&args))
-	{
-		put_error(0);
-		return (1);
-	}
-	return (0);
+	if (code || dining_philo(&args))
+		code = -1;
+	mutex_del(args.lock_printf);
+	put_error(code);
+	return (code);
 }
 
 static void	put_error(int code)
 {
 	char	*msg;
 
-	if (code == 1)
+	if (code == 0)
+		return ;
+	else if (code == 1)
 		msg = MSG_HELP;
 	else if (code == 2)
 		msg = MSG_INVALID_VALUE;

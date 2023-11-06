@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 03:25:49 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:38:45 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,20 @@ int	philo__do_to_eat(t_philo *self)
 
 	if (philo__take_fork(self))
 		return (-1);
+	pthread_mutex_lock(self->_table->_lock);
 	pthread_mutex_lock(self->_lock);
-	self->last_ate_time = -1;
+	self->last_ate_time = table__get_time(self->_table);
 	self->count_to_eat++;
 	pthread_mutex_unlock(self->_lock);
+	pthread_mutex_unlock(self->_table->_lock);
 	stop = table__check_satisfied(self->_table);
 	(void)(stop && table__stop(self->_table));
 	philo__put_msg(self, MSG_EATING, stop);
 	philovisualizer_send(self->_nbr, PV_EATING);
 	if (!philo__get_active(self))
 		return (-1);
-	msleep(self->_time_to_eat);
+	msleep(self->_table->_time_to_eat);
 	philo__put_fork(self);
-	pthread_mutex_lock(self->_table->_lock);
-	pthread_mutex_lock(self->_lock);
-	self->last_ate_time = table__get_time(self->_table);
-	pthread_mutex_unlock(self->_lock);
-	pthread_mutex_unlock(self->_table->_lock);
 	philovisualizer_send(self->_nbr, PV_THINKING);
 	return (0);
 }
@@ -72,7 +69,7 @@ int	philo__do_to_sleep(t_philo *self)
 		return (-1);
 	philo__put_msg(self, MSG_SLEEPING, 0);
 	philovisualizer_send(self->_nbr, PV_SLEEPING);
-	msleep(self->_time_to_sleep);
+	msleep(self->_table->_time_to_sleep);
 	return (0);
 }
 

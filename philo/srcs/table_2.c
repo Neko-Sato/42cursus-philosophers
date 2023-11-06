@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 02:11:10 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 21:28:56 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int	table__put_msg(t_table *self, int nbr, char *msg, int enforce)
+{
+	pthread_mutex_lock(self->_lock);
+	pthread_mutex_lock(self->_lock_printf);
+	if (enforce || self->is_running)
+		printf("%ld %d %s\n", table__get_time(self), nbr, msg);
+	pthread_mutex_unlock(self->_lock_printf);
+	pthread_mutex_unlock(self->_lock);
+	return (0);
+}
+
 long	table__get_time(t_table *self)
 {
-	long			time;
 	struct timeval	now;
 
 	gettimeofday(&now, NULL);
-	time = timeval2useconds(interval(now, self->start_time));
-	return (time);
+	if (self->start_time.tv_sec == 0 && self->start_time.tv_usec == 0)
+	{
+		self->start_time = now;
+		return (0);
+	}
+	return (timeval2useconds(interval(now, self->start_time)));
 }
 
 int	table__check_died(t_table *self)
@@ -39,7 +53,7 @@ int	table__check_died(t_table *self)
 		pthread_mutex_lock(self->_lock);
 		pthread_mutex_lock(philo->_lock);
 		isdied = (0 <= philo->last_ate_time && philo->last_ate_time
-				+ philo->_time_to_die < table__get_time(self));
+				+ self->_time_to_die < table__get_time(self));
 		pthread_mutex_unlock(philo->_lock);
 		pthread_mutex_unlock(self->_lock);
 		if (isdied)
@@ -60,7 +74,7 @@ int	table__check_satisfied(t_table *self)
 	{
 		philo = self->_philos[i++];
 		pthread_mutex_lock(philo->_lock);
-		ret &= (philo->_must_eat && philo->_must_eat <= philo->count_to_eat);
+		ret &= (self->_must_eat && self->_must_eat <= philo->count_to_eat);
 		pthread_mutex_unlock(philo->_lock);
 	}
 	return (ret);
