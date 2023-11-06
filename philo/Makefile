@@ -6,7 +6,7 @@
 #    By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/28 21:24:52 by hshimizu          #+#    #+#              #
-#    Updated: 2023/11/06 21:59:13 by hshimizu         ###   ########.fr        #
+#    Updated: 2023/11/06 22:21:55 by hshimizu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,10 +40,7 @@ SRCS			= \
 		ft_isnumber.c \
 		ft_isspace.c \
 		ft_strchr.c \
-	) \
-	$(addprefix $(ROOT_DIR)/philo_visualizer/, \
-		philo_visualizer.c \
-	)
+	) 
 
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
@@ -53,8 +50,8 @@ CFLAGS			= -Wall -Wextra -Werror
 # CFLAGS			+= -fsanitize=address
 # CFLAGS			+= -g
 IDFLAGS			+= -I$(INCS_DIR)
-IDFLAGS			+= -I./philo_visualizer 
-LIBS			= -pthread
+IDFLAGS			+= -I./../philo_visualizer 
+LIBS			= -pthread ./../philo_visualizer/libphilovisual.so
 
 .PHONY: all clean fclean re bonus
 

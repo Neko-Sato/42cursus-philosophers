@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 21:43:39 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 22:42:21 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,12 @@ int	philo__stop(t_philo *self)
 
 void	*philo__routine(t_philo *self)
 {
-	if (self->_table->_len % 2)
+	if (self->_table->_snooze)
 	{
 		if (!philo__get_active(self))
 			return (NULL);
-		msleep(
-			self->_table->_time_to_eat / (self->_table->_len / 2)
-			* reverse_even_odd(self->_nbr - 1, self->_table->_len));
+		msleep(self->_table->_snooze * reverse_even_odd(self->_nbr - 1,
+				self->_table->_len));
 	}
 	while (1)
 	{
@@ -66,6 +65,8 @@ void	*philo__routine(t_philo *self)
 			break ;
 		if (philo__do_to_think(self))
 			break ;
+		if (self->_table->_snooze)
+			msleep(self->_table->_snooze);
 	}
 	philo__put_fork(self);
 	return (NULL);
