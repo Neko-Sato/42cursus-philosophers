@@ -6,12 +6,11 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 21:43:49 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/07 03:07:59 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "philo_visualizer.h"
 #include "table.h"
 #include "utils.h"
 #include <stddef.h>
@@ -81,7 +80,6 @@ void	*table__monitor(t_table *self)
 		if (temp)
 		{
 			table__stop(self);
-			philovisualizer_send(temp, PV_DIED);
 			philo__put_msg(self->_philos[temp - 1], MSG_DIED, 1);
 			break ;
 		}
