@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:53:31 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 18:00:55 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/06 21:47:39 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,10 @@ static int	purse_args(t_dining_philo_args *args, int argc, char *argv[])
 		return (2);
 	if (str2num(&args->time_to_sleep, argv[4], 50, (long)(~0u)))
 		return (2);
-	if (argc == 6)
-	{
-		if (str2num(&args->must_eat, argv[5], 1, (long)(~0u)))
-			return (2);
-	}
-	else
+	if (argc != 6)
 		args->must_eat = 0;
+	else if (str2num(&args->must_eat, argv[5], 1, (long)(~0u)))
+		return (2);
 	return (0);
 }
 
