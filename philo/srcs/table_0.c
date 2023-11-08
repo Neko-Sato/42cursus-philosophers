@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 22:39:30 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/09 08:00:21 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static t_philo	**create_philos(t_table *self)
 	{
 		args.nbr = i + 1;
 		args.left_fork = &self->_forks[i];
-		args.right_fork = &self->_forks[(i + self->_len + 1) % self->_len];
+		args.right_fork = &self->_forks[(i + self->_len - 1) % self->_len];
 		philos[i] = philo__new(&args);
 		if (!philos[i])
 		{
