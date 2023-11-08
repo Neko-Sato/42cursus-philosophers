@@ -6,7 +6,7 @@
 #    By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/28 21:24:52 by hshimizu          #+#    #+#              #
-#    Updated: 2023/11/07 03:12:37 by hshimizu         ###   ########.fr        #
+#    Updated: 2023/11/09 03:43:47 by hshimizu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,8 @@ CFLAGS			= -Wall -Wextra -Werror
 # CFLAGS			+= -fsanitize=address
 # CFLAGS			+= -g
 IDFLAGS			+= -I$(INCS_DIR)
-LIBS			= -pthread
+# IDFLAGS			+= -I../philo_visualizer
+# LIBS			= -pthread ../philo_visualizer/libphilovisual.so
 
 ifeq ($(MSG), color)
 	CFLAGS		+= -D COLOR_MSG
