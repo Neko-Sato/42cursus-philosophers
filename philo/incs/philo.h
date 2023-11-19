@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 18:20:03 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/19 09:12:51 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,6 @@ typedef struct s_table	t_table;
 #  define MSG_DIED "\e[38;2;255;0;0mdied\e[0m"
 # endif
 
-typedef enum e_philo_state
-{
-	none,
-	has_taken_fork,
-	thinking,
-	eating,
-	sleeping,
-	died,
-}						t_philo_state;
-
 typedef struct s_philo
 {
 	pthread_mutex_t		*_lock;
@@ -65,9 +55,8 @@ typedef struct s_philo_args
 }						t_philo_args;
 
 //	0
-t_philo					*philo__new(t_philo_args *args);
 int						philo__init(t_philo *self, t_philo_args *args);
-int						philo__del(t_philo **self_ptr);
+int						philo__del(t_philo *self);
 
 //	1
 int						philo__start(t_philo *self);

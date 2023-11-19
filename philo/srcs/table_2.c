@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 21:28:56 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/19 09:37:31 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	table__check_died(t_table *self)
 	i = 0;
 	while (i < self->_len)
 	{
-		philo = self->_philos[i++];
+		philo = &self->_philos[i++];
 		pthread_mutex_lock(self->_lock);
 		pthread_mutex_lock(philo->_lock);
 		isdied = (0 <= philo->last_ate_time && philo->last_ate_time
@@ -72,7 +72,7 @@ int	table__check_satisfied(t_table *self)
 	i = 0;
 	while (ret && i < self->_len)
 	{
-		philo = self->_philos[i++];
+		philo = &self->_philos[i++];
 		pthread_mutex_lock(philo->_lock);
 		ret &= (self->_must_eat && self->_must_eat <= philo->count_to_eat);
 		pthread_mutex_unlock(philo->_lock);

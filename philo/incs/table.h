@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/06 22:38:41 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/19 09:38:28 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_table
 	size_t				_len;
 	size_t				__forks_len;
 	pthread_mutex_t		*_forks;
-	t_philo				**_philos;
+	t_philo				*_philos;
 	long				_time_to_die;
 	long				_time_to_eat;
 	long				_time_to_sleep;
@@ -47,11 +47,8 @@ typedef struct s_table_args
 }						t_table_args;
 
 //	0
-t_table					*table__new(t_table_args *args);
-int						table__int(t_table *self, t_table_args *args);
-int						table__del(t_table **self_ptr);
-int						table__seat_philo(t_table *self);
-int						table__leave_philo(t_table *self);
+int						table__init(t_table *self, t_table_args *args);
+int						table__del(t_table *self);
 
 //	1
 int						table__start(t_table *self);

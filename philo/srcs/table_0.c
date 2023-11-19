@@ -6,33 +6,38 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/09 08:00:21 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/19 09:56:13 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include "table.h"
 #include "utils.h"
+#include <string.h>
 #include <stdlib.h>
 
-static t_philo	**create_philos(t_table *self);
+static int		init(t_table *self, t_table_args *args);
+static int		del(t_table *self);
+static t_philo	*create_philos(t_table *self);
 
-t_table	*table__new(t_table_args *args)
+int	table__init(t_table *self, t_table_args *args)
 {
-	t_table	*self;
+	int	result;
 
-	self = malloc(sizeof(*self));
-	if (self)
-	{
-		*self = (t_table){0};
-		if (table__int(self, args))
-			table__del(&self);
-	}
-	return (self);
+	result = init(self, args);
+	if (result)
+		del(self);
+	return (result);
 }
 
-int	table__int(t_table *self, t_table_args *args)
+int	table__del(t_table *self)
 {
+	return (del(self));
+}
+
+static int	init(t_table *self, t_table_args *args)
+{
+	memset(self, 0, sizeof(*self));
 	self->_len = args->len;
 	self->_time_to_die = args->time_to_die;
 	self->_time_to_eat = args->time_to_eat;
@@ -56,11 +61,8 @@ int	table__int(t_table *self, t_table_args *args)
 	return (0);
 }
 
-int	table__del(t_table **self_ptr)
+static int	del(t_table *self)
 {
-	t_table	*self;
-
-	self = *self_ptr;
 	while (self->_philos && self->_len--)
 		philo__del(&self->_philos[self->_len]);
 	free(self->_philos);
@@ -68,18 +70,16 @@ int	table__del(t_table **self_ptr)
 		pthread_mutex_destroy(&self->_forks[self->__forks_len]);
 	free(self->_forks);
 	mutex_del(self->_lock);
-	free(self);
-	*self_ptr = NULL;
 	return (0);
 }
 
-static t_philo	**create_philos(t_table *self)
+static t_philo	*create_philos(t_table *self)
 {
 	t_philo_args	args;
-	t_philo			**philos;
+	t_philo			*philos;
 	size_t			i;
 
-	philos = malloc(sizeof(t_philo *[self->_len]));
+	philos = malloc(sizeof(t_philo [self->_len]));
 	if (!philos)
 		return (NULL);
 	args.table = self;
@@ -89,11 +89,10 @@ static t_philo	**create_philos(t_table *self)
 		args.nbr = i + 1;
 		args.left_fork = &self->_forks[i];
 		args.right_fork = &self->_forks[(i + self->_len - 1) % self->_len];
-		philos[i] = philo__new(&args);
-		if (!philos[i])
+		if (philo__init(&philos[i], &args))
 		{
 			while (--i)
-				free(philos[i]);
+				philo__del(&philos[i]);
 			free(philos);
 			return (NULL);
 		}

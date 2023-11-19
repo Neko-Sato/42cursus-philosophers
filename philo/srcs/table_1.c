@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/07 03:07:59 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/19 09:37:12 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	table__start(t_table *self)
 			break ;
 		i = 0;
 		while (i < self->_len)
-			if (philo__start(self->_philos[even_odd(i++, self->_len)]))
+			if (philo__start(&self->_philos[even_odd(i++, self->_len)]))
 				break ;
 		if (i < self->_len)
 			break ;
@@ -48,7 +48,7 @@ int	table__wait(t_table *self)
 	thread_join(self->_thread, NULL);
 	i = 0;
 	while (i < self->_len)
-		philo__wait(self->_philos[i++]);
+		philo__wait(&self->_philos[i++]);
 	return (0);
 }
 
@@ -61,7 +61,7 @@ int	table__stop(t_table *self)
 	pthread_mutex_unlock(self->_lock);
 	i = 0;
 	while (i < self->_len)
-		philo__stop(self->_philos[i++]);
+		philo__stop(&self->_philos[i++]);
 	return (0);
 }
 
@@ -80,7 +80,7 @@ void	*table__monitor(t_table *self)
 		if (temp)
 		{
 			table__stop(self);
-			philo__put_msg(self->_philos[temp - 1], MSG_DIED, 1);
+			philo__put_msg(&self->_philos[temp - 1], MSG_DIED, 1);
 			break ;
 		}
 	}

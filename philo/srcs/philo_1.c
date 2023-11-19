@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/07 03:15:40 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/19 10:06:29 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ void	*philo__routine(t_philo *self)
 			break ;
 		if (philo__do_to_think(self))
 			break ;
-		if (self->_table->_snooze)
-			msleep(self->_table->_snooze / 10);
 	}
 	philo__put_fork(self);
 	return (NULL);
