@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:53:31 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/19 09:51:09 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/19 10:19:48 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static void	put_error(int code)
 static int	purse_args(t_dining_philo_args *args, int argc, char *argv[],
 		void *lock_printf)
 {
-	if (!lock_printf)
+	args->lock_printf = lock_printf;
+	if (!args->lock_printf)
 		return (-1);
 	if (argc < 5 || 6 < argc)
 		return (1);
