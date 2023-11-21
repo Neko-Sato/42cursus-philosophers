@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"philo.h": "c",
-		"utils.h": "c",
-		"table.h": "c",
-		"string.h": "c",
-		"stddef.h": "c"
-	}
-}

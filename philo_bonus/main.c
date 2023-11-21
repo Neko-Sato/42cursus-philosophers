@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:53:31 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/21 23:15:43 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/21 23:15:35 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <unistd.h>
 
 #define MSG_HELP "\
-Usage : ./philo NUMBER TIME_TO_DIE TIME_TO_EAT TIME_TO_SLEEP [MUST_EAT]\n\
+Usage : ./philo_bonus NUMBER TIME_TO_DIE TIME_TO_EAT TIME_TO_SLEEP [MUST_EAT]\n\
 \n\
 \tNUMBER\t\tNumber of philosophers and forks.\n\
 \tTIME_TO_DIE\tTime to die.\n\

@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/21 13:50:05 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:50:46 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	init(t_table *self, t_table_args *args)
 	if (!self->_lock_printf)
 		return (-1);
 	if (self->_len % 2)
-		self->_snooze = self->_time_to_eat / (self->_len / 2);
+		self->_snooze = self->_time_to_eat / (double)(self->_len / 2);
 	self->_lock = mutex_new();
 	if (!self->_lock)
 		return (-1);
