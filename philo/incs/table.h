@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/19 09:38:28 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:46:39 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_table_args
 	long				time_to_eat;
 	long				time_to_sleep;
 	size_t				must_eat;
-	pthread_mutex_t		*lock_printf;
 }						t_table_args;
 
 //	0

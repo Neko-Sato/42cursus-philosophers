@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:22:36 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/19 09:39:35 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:48:36 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	dining_philo(t_dining_philo_args *args)
 	while (1)
 	{
 		if (table__init(&table, &(t_table_args){args->len, args->time_to_die,
-				args->time_to_eat, args->time_to_sleep, args->must_eat,
-				args->lock_printf}))
+				args->time_to_eat, args->time_to_sleep, args->must_eat}))
 			break ;
 		if (table__start(&table))
 			break ;

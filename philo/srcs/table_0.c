@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/19 09:56:13 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:50:05 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ static int	init(t_table *self, t_table_args *args)
 	self->_time_to_eat = args->time_to_eat;
 	self->_time_to_sleep = args->time_to_sleep;
 	self->_must_eat = args->must_eat;
-	self->_lock_printf = args->lock_printf;
+	self->_lock_printf = mutex_new();
+	if (!self->_lock_printf)
+		return (-1);
 	if (self->_len % 2)
 		self->_snooze = self->_time_to_eat / (self->_len / 2);
 	self->_lock = mutex_new();
@@ -70,6 +72,7 @@ static int	del(t_table *self)
 		pthread_mutex_destroy(&self->_forks[self->__forks_len]);
 	free(self->_forks);
 	mutex_del(self->_lock);
+	mutex_del(self->_lock_printf);
 	return (0);
 }
 

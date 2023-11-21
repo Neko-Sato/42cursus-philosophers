@@ -6,7 +6,7 @@
 #    By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/28 21:24:52 by hshimizu          #+#    #+#              #
-#    Updated: 2023/11/09 03:46:22 by hshimizu         ###   ########.fr        #
+#    Updated: 2023/11/20 09:53:55 by hshimizu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,15 +44,12 @@ SRCS			= \
 
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
-CC				= gcc-10
 CFLAGS			= -Wall -Wextra -Werror
 # CFLAGS			+= -fsanitize=thread
 # CFLAGS			+= -fsanitize=address
 # CFLAGS			+= -g
 IDFLAGS			+= -I$(INCS_DIR)
-# IDFLAGS			+= -I../philo_visualizer
 LIBS			= -pthread
-# LIBS			+=  ../philo_visualizer/libphilovisual.so
 
 ifeq ($(MSG), color)
 	CFLAGS		+= -D COLOR_MSG

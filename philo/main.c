@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:53:31 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/19 10:19:48 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:47:46 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,18 @@ profile\t: https://profile.intra.42.fr/users/hshimizu\n\
 #define MSG_INVALID_VALUE "Invalid value\n"
 #define MSG_ERROR "Error\n"
 
-static int	purse_args(t_dining_philo_args *args, int argc, char *argv[],
-				void *lock_printf);
+static int	purse_args(t_dining_philo_args *args, int argc, char *argv[]);
 static void	put_error(int code);
 static int	str2num(long *num, char *str, long min, long max);
 
 int	main(int argc, char *argv[])
 {
-	void				*lock_printf;
 	t_dining_philo_args	args;
 	int					code;
 
-	lock_printf = mutex_new();
-	code = purse_args(&args, argc, argv, lock_printf);
+	code = purse_args(&args, argc, argv);
 	if (!code && dining_philo(&args))
 		code = -1;
-	mutex_del(lock_printf);
 	put_error(code);
 	return (code);
 }
@@ -66,12 +62,8 @@ static void	put_error(int code)
 	write(STDERR_FILENO, msg, ft_strlen(msg));
 }
 
-static int	purse_args(t_dining_philo_args *args, int argc, char *argv[],
-		void *lock_printf)
+static int	purse_args(t_dining_philo_args *args, int argc, char *argv[])
 {
-	args->lock_printf = lock_printf;
-	if (!args->lock_printf)
-		return (-1);
 	if (argc < 5 || 6 < argc)
 		return (1);
 	if (str2num(&args->len, argv[1], 1, (long)(~0u)))
