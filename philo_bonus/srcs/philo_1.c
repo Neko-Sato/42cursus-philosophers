@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/21 23:14:19 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/21 23:43:25 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 
 int	philo__run(t_philo *self)
 {
-	self->check_died = thread_start((void *)philo__check_died, self);
-	if (!self->check_died)
+	if (pthread_create(&self->check_died, NULL, (void *)philo__check_died,
+			self))
 		return (-1);
-	pthread_detach(*self->check_died);
+	pthread_detach(self->check_died);
 	philo__routine(self);
 	return (0);
 }

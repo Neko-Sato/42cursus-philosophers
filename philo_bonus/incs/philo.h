@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/21 10:21:10 by hshimizu         ###   ########.fr       */
+/*   Updated: 2023/11/21 23:42:26 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_philo
 {
 	sem_t				*lock;
 	t_table				*table;
-	pthread_t			*check_died;
+	pthread_t			check_died;
 	int					nbr;
 	long				last_ate_time;
 	size_t				count_to_eat;

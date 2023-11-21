@@ -6,7 +6,7 @@
 #    By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/28 21:24:52 by hshimizu          #+#    #+#              #
-#    Updated: 2023/11/21 23:18:34 by hshimizu         ###   ########.fr        #
+#    Updated: 2023/11/21 23:44:36 by hshimizu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,7 @@ SRCS			= \
 		table_2.c \
 	) \
 	$(addprefix $(ROOT_DIR)/utils/, \
-		utils.c \
 		process.c \
-		thread.c \
 		time.c \
 		ft_strlen.c \
 		ft_atol.c \
@@ -43,7 +41,6 @@ SRCS			= \
 
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
-CC				= gcc-10
 CFLAGS			= -Wall -Wextra -Werror
 # CFLAGS			+= -fsanitize=thread
 # CFLAGS			+= -fsanitize=address
