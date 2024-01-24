@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/21 23:43:25 by hshimizu         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:03:26 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	*philo__check_died(t_philo *self)
 	}
 	sem_wait(self->table->stop);
 	philo__put_msg(self, MSG_DIED);
-	exit(0);
+	exit(1);
 	return (NULL);
 }
 
@@ -53,6 +53,9 @@ int	philo__routine(t_philo *self)
 	while (1)
 	{
 		philo__do_to_eat(self);
+		if (self->table->must_eat
+			&& self->count_to_eat >= self->table->must_eat)
+			break ;
 		philo__do_to_sleep(self);
 		philo__do_to_think(self);
 		if (self->table->len % 2)

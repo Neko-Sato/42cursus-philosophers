@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/21 21:23:15 by hshimizu         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:59:56 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct s_table
 {
 	sem_t				*lock_printf;
 	sem_t				*stop;
-	sem_t				*satisfied;
 	pid_t				*process;
 	struct timeval		start_time;
 	size_t				len;
@@ -51,7 +50,6 @@ int						table__del(t_table *self);
 int						table__run(t_table *self);
 int						table__wait(t_table *self);
 int						table__stop(t_table *self);
-int						table__check_satisfied(t_table *self);
 
 //	2
 long					table__get_time(t_table *self);

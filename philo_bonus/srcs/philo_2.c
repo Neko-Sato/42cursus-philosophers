@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:46:58 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/21 23:14:05 by hshimizu         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:24:42 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int	philo__do_to_eat(t_philo *self)
 	self->count_to_eat++;
 	self->last_ate_time = table__get_time(self->table);
 	sem_wait(self->table->stop);
-	if (self->count_to_eat == self->table->must_eat)
-		sem_post(self->table->satisfied);
 	philo__put_msg(self, MSG_EATING);
 	sem_post(self->table->stop);
 	sem_post(self->lock);
