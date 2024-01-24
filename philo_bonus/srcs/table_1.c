@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2024/01/24 16:03:20 by hshimizu         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:58:28 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,12 @@ int	table__run(t_table *self)
 int	table__wait(t_table *self)
 {
 	int		status;
-	pid_t	pid;
 	size_t	count;
-	size_t	i;
 
 	count = 0;
 	while (count < self->len)
 	{
-		pid = waitpid(-1, &status, 0);
-		i = 0;
-		while (i < self->len)
-			if (self->process[i++] == pid)
-				break ;
-		self->process[i] = -1;
+		waitpid(-1, &status, 0);
 		if (WIFEXITED(status) && WEXITSTATUS(status))
 			return (WEXITSTATUS(status));
 		count++;
