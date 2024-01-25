@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 09:43:59 by hshimizu          #+#    #+#             */
-/*   Updated: 2024/01/25 12:13:37 by hshimizu         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:49:12 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	gettime(void)
 
 void	msleep(unsigned int time)
 {
-	int end_time;
+	int	end_time;
 
 	end_time = gettime() + time;
 	while (end_time > gettime())

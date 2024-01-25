@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:53:31 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/21 23:15:35 by hshimizu         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:53:48 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,6 @@
 #include <errno.h>
 #include <unistd.h>
 
-#define MSG_HELP "\
-Usage : ./philo_bonus NUMBER TIME_TO_DIE TIME_TO_EAT TIME_TO_SLEEP [MUST_EAT]\n\
-\n\
-\tNUMBER\t\tNumber of philosophers and forks.\n\
-\tTIME_TO_DIE\tTime to die.\n\
-\tTIME_TO_EAT\tTime to eat.\n\
-\tTIME_TO_SLEEP\tTime to sleep.\n\
-\t[MUST_EAT]\tFinish when each philosopher has eaten this many times.\n\
-\n\
-Made by hshimizu.\n\
-github\t: https://github.com/Neko-Sato\n\
-profile\t: https://profile.intra.42.fr/users/hshimizu\n\
-"
 #define MSG_INVALID_VALUE "Invalid value\n"
 #define MSG_ERROR "Error\n"
 
@@ -54,7 +41,19 @@ static void	put_error(int code)
 	if (!code)
 		return ;
 	else if (code == 1)
-		msg = MSG_HELP;
+		msg = "\
+Usage : ./philo_bonus NUMBER TIME_TO_DIE TIME_TO_EAT TIME_TO_SLEEP [MUST_EAT]\n\
+\n\
+\tNUMBER\t\tNumber of philosophers and forks.\n\
+\tTIME_TO_DIE\tTime to die.\n\
+\tTIME_TO_EAT\tTime to eat.\n\
+\tTIME_TO_SLEEP\tTime to sleep.\n\
+\t[MUST_EAT]\tFinish when each philosopher has eaten this many times.\n\
+\n\
+Made by hshimizu.\n\
+github\t: https://github.com/Neko-Sato\n\
+profile\t: https://profile.intra.42.fr/users/hshimizu\n\
+";
 	else if (code == 2)
 		msg = MSG_INVALID_VALUE;
 	else
