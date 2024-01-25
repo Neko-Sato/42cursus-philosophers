@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 01:56:42 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/19 09:37:12 by hshimizu         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:34:15 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,15 @@ int	table__start(t_table *self)
 			break ;
 		i = 0;
 		while (i < self->_len)
-			if (philo__start(&self->_philos[even_odd(i++, self->_len)]))
+		{
+			if (philo__start(&self->_philos[even_odd(i, self->_len)]))
 				break ;
+			i++;
+		}
 		if (i < self->_len)
 			break ;
 		self->is_running = 1;
+		gettimeofday(&self->start_time, NULL);
 		pthread_mutex_unlock(self->_lock);
 		return (0);
 	}

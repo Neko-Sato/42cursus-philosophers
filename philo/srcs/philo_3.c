@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 23:29:05 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/07 03:09:16 by hshimizu         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:29:21 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,20 @@ int	philo__do_to_eat(t_philo *self)
 {
 	int	stop;
 
+	stop = 0;
 	if (philo__take_fork(self))
 		return (-1);
-	pthread_mutex_lock(self->_table->_lock);
 	pthread_mutex_lock(self->_lock);
 	self->last_ate_time = table__get_time(self->_table);
-	self->count_to_eat++;
 	pthread_mutex_unlock(self->_lock);
-	pthread_mutex_unlock(self->_table->_lock);
-	stop = table__check_satisfied(self->_table);
-	(void)(stop && table__stop(self->_table));
+	if (++self->_count_to_eat == self->_table->_must_eat)
+	{
+		pthread_mutex_lock(self->_table->_lock);
+		stop = ++self->_table->_satisfied >= self->_table->_len;
+		pthread_mutex_unlock(self->_table->_lock);
+	}
+	if (stop)
+		table__stop(self->_table);
 	philo__put_msg(self, MSG_EATING, stop);
 	if (!philo__get_active(self))
 		return (-1);

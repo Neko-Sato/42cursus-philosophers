@@ -6,7 +6,7 @@
 /*   By: hshimizu <hshimizu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 20:33:00 by hshimizu          #+#    #+#             */
-/*   Updated: 2023/11/21 17:51:00 by hshimizu         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:41:07 by hshimizu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_table
 	pthread_t			*_thread;
 	struct timeval		start_time;
 	size_t				_len;
+	size_t				_satisfied;
 	size_t				__forks_len;
 	pthread_mutex_t		*_forks;
 	t_philo				*_philos;
